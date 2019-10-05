@@ -52,7 +52,7 @@ useEffect(() => {
                     <li key={request._id}>
                         <p>
                             <strong>
-                                {request.user.email} esta solicitando uma reserva em <strong>[request.spot.company</strong> para a data: <strong>{request.date}</strong>
+                                {request.user.email} esta solicitando uma reserva em <strong>{request.spot.company}</strong> para a data: <strong>{request.date}</strong>
                             </strong>
                         </p>
                         <button className="accept">Aceitar</button>
