@@ -63,7 +63,7 @@ export default function Login({navigation}) {
             />
 
             <TouchableOpacity onPress={handleSubmit} style={styles.button}>
-                <Text style={styles.buttonText}>Encontrar Sport</Text>
+                <Text style={styles.buttonText}>Encontrar Spot</Text>
             </TouchableOpacity>
 
         </View>

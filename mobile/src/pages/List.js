@@ -1,5 +1,6 @@
 import React , {useState, useEffect } from 'react';
-import {SafeAreaView,ScrollView, Text,AsyncStorage,Image,StyleSheet,Platform} from 'react-native';
+import socketio from 'socket.io-client';
+import {Alert , SafeAreaView,ScrollView, Text,AsyncStorage,Image,StyleSheet,Platform} from 'react-native';
 
 import SpotList from '../components/SpotList';
 
@@ -10,10 +11,22 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 export default function List({navigation}) {
     
     const [techs,setTechs] = useState([]);
+
     async function logout(){
         await AsyncStorage.removeItem('user')
         navigation.navigate('Login');
     }
+
+    useEffect(() => {
+        AsyncStorage.getItem('user').then(user_id => {
+            const socket = socketio('http://192.168.56.1:3333', {
+                query: {user_id}
+            })
+            socket.on('booking_response',booking => {
+                Alert.alert(`Sua reserva em ${booking.spot.company} em ${booking.date} foi ${booking.approved === true ? "APROVADA": "REJEITADA"}`);
+            })
+        })
+    } , [])
    
 
     useEffect(() => {

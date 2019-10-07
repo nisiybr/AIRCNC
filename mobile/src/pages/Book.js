@@ -1,5 +1,5 @@
 import React , {useState} from 'react';
-import {SafeAreaView,Text,StyleSheet, Platform ,TextInput, TouchableOpacity, AsyncStorage} from 'react-native';
+import {Alert ,SafeAreaView,Text,StyleSheet, Platform ,TextInput, TouchableOpacity, AsyncStorage} from 'react-native';
 
 import api from '../services/api';
 
@@ -15,7 +15,7 @@ export default function Book({navigation}) {
         },{
             headers:{user_id}
         });
-
+        Alert.alert('Sua reserva foi realizada!');
         navigation.navigate('List');
     }
     function submitCancel(){

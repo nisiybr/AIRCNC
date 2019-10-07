@@ -43,7 +43,19 @@ useEffect(() => {
     }
     loadSpots();
 
+
 } , []);
+
+async function handleAccept(id){
+    await api.post(`/bookings/${id}/approvals`) //chama a rota de aprovação da solicitacao
+    setRequests(requests.filter(request => request._id !== id)); //retira da lista
+    
+}
+async function handleReject(id){
+    await api.post(`/bookings/${id}/rejections`) //chama a rota de aprovação da solicitacao
+    setRequests(requests.filter(request => request._id !== id)); //retira da lista
+
+}
 
     return (
         <>
@@ -55,8 +67,8 @@ useEffect(() => {
                                 {request.user.email} esta solicitando uma reserva em <strong>{request.spot.company}</strong> para a data: <strong>{request.date}</strong>
                             </strong>
                         </p>
-                        <button className="accept">Aceitar</button>
-                        <button className="decline">Rejeitar</button>
+                        <button className="accept" onClick={() => handleAccept(request._id)}>Aceitar</button>
+                        <button className="decline" onClick={() => handleReject(request._id)}>Rejeitar</button>
                     </li>
                 ) )}
             </ul>
